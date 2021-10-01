@@ -11,4 +11,10 @@ class DrawingView: UIImageView {
     
 }
 
+extension DrawingView: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self
+    }
+}
+
 

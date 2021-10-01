@@ -22,7 +22,8 @@ class ViewController: UIViewController {
     private func setUpLayout() {
 
         let viewSize = CGRect(x: 0, y: 0, width: 350, height: 350)
-        self.sketchView = SketchView(backgroundImage: UIImage(), frame: viewSize)
+        self.sketchView = SketchView(backgroundImage: UIImage(named: "Developers") ?? UIImage(), frame: viewSize)
+        (sketchView).isUserInteractionEnabled = true
         view.addSubview(sketchView)
         setUpSketchView()
     }
