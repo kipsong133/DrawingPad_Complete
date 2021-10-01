@@ -11,32 +11,29 @@ import Then
 
 class ViewController: UIViewController {
 
-    private var mainImageView: ImageZoomView!
+    private var sketchView: SketchView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLayout()
-        
+        overrideUserInterfaceStyle = .light // light mode
     }
 
     private func setUpLayout() {
-        let imageViewWidth =  view.bounds.width * 0.8
-        let imageViewHeight =  view.bounds.width * 0.8
-        let imageFrame = CGRect(x: 0, y: 0,
-                                width: imageViewWidth,
-                                height: imageViewHeight)
-        mainImageView = ImageZoomView(frame: imageFrame)
-        mainImageView.setImage(image: UIImage(named: "Developers") ?? UIImage())
-        view.addSubview(mainImageView)
-        setUpImageViews()
+
+        let viewSize = CGRect(x: 0, y: 0, width: 350, height: 350)
+        self.sketchView = SketchView(backgroundImage: UIImage(), frame: viewSize)
+        view.addSubview(sketchView)
+        setUpSketchView()
     }
     
-    private func setUpImageViews() {
-        mainImageView.snp.makeConstraints {
-            $0.top.equalTo(view.snp.top)
-            $0.bottom.equalTo(view.snp.bottom)
-            $0.left.equalTo(view.snp.left)
-            $0.right.equalTo(view.snp.right)
+    private func setUpSketchView() {
+        
+        sketchView.snp.makeConstraints {
+            $0.centerX.equalTo(view.snp.centerX)
+            $0.centerY.equalTo(view.snp.centerY)
+            $0.width.equalTo(350)
+            $0.height.equalTo(350)
         }
     }
 }

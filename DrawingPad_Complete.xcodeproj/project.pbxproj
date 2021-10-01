@@ -13,10 +13,13 @@
 		25E2E9282706BD2300628782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25E2E9262706BD2300628782 /* Main.storyboard */; };
 		25E2E92A2706BD2500628782 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25E2E9292706BD2500628782 /* Assets.xcassets */; };
 		25E2E92D2706BD2500628782 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25E2E92B2706BD2500628782 /* LaunchScreen.storyboard */; };
-		25E2E9392706BD8B00628782 /* ImageZoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E2E9382706BD8B00628782 /* ImageZoomView.swift */; };
+		25E2E9392706BD8B00628782 /* SketchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E2E9382706BD8B00628782 /* SketchView.swift */; };
 		25E2E93C2706BF2D00628782 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 25E2E93B2706BF2D00628782 /* SnapKit */; };
 		25E2E93F2706BF4900628782 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 25E2E93E2706BF4900628782 /* Then */; };
 		25E2E9412706C29C00628782 /* Developers.png in Resources */ = {isa = PBXBuildFile; fileRef = 25E2E9402706C29C00628782 /* Developers.png */; };
+		25E2E9432706C3CB00628782 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E2E9422706C3CB00628782 /* DrawingView.swift */; };
+		25E2E9462706DF0300628782 /* DrawingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E2E9452706DF0300628782 /* DrawingViewModel.swift */; };
+		25E2E9482706E19A00628782 /* Pencil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E2E9472706E19A00628782 /* Pencil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +31,11 @@
 		25E2E9292706BD2500628782 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25E2E92C2706BD2500628782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		25E2E92E2706BD2500628782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		25E2E9382706BD8B00628782 /* ImageZoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomView.swift; sourceTree = "<group>"; };
+		25E2E9382706BD8B00628782 /* SketchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchView.swift; sourceTree = "<group>"; };
 		25E2E9402706C29C00628782 /* Developers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Developers.png; sourceTree = "<group>"; };
+		25E2E9422706C3CB00628782 /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
+		25E2E9452706DF0300628782 /* DrawingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewModel.swift; sourceTree = "<group>"; };
+		25E2E9472706E19A00628782 /* Pencil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pencil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +70,7 @@
 		25E2E91F2706BD2300628782 /* DrawingPad_Complete */ = {
 			isa = PBXGroup;
 			children = (
+				25E2E9442706DEFB00628782 /* ViewModel */,
 				25E2E9372706BD3800628782 /* App */,
 				25E2E9362706BD3600628782 /* Model */,
 				25E2E9352706BD3200628782 /* Controller */,
@@ -80,7 +87,8 @@
 			children = (
 				25E2E9262706BD2300628782 /* Main.storyboard */,
 				25E2E92B2706BD2500628782 /* LaunchScreen.storyboard */,
-				25E2E9382706BD8B00628782 /* ImageZoomView.swift */,
+				25E2E9382706BD8B00628782 /* SketchView.swift */,
+				25E2E9422706C3CB00628782 /* DrawingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -96,6 +104,7 @@
 		25E2E9362706BD3600628782 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				25E2E9472706E19A00628782 /* Pencil.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -107,6 +116,14 @@
 				25E2E9222706BD2300628782 /* SceneDelegate.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		25E2E9442706DEFB00628782 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				25E2E9452706DF0300628782 /* DrawingViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,8 +208,11 @@
 			files = (
 				25E2E9252706BD2300628782 /* ViewController.swift in Sources */,
 				25E2E9212706BD2300628782 /* AppDelegate.swift in Sources */,
+				25E2E9432706C3CB00628782 /* DrawingView.swift in Sources */,
 				25E2E9232706BD2300628782 /* SceneDelegate.swift in Sources */,
-				25E2E9392706BD8B00628782 /* ImageZoomView.swift in Sources */,
+				25E2E9392706BD8B00628782 /* SketchView.swift in Sources */,
+				25E2E9462706DF0300628782 /* DrawingViewModel.swift in Sources */,
+				25E2E9482706E19A00628782 /* Pencil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
