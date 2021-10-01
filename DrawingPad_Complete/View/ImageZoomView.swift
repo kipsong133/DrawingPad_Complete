@@ -1,18 +1,26 @@
-//
-//  DrawingView.swift
-//  DrawingPad_Complete
-//
-//  Created by 김우성 on 2021/10/01.
-//
+/*
+  DrawingView.swift
+  DrawingPad_Complete
+
+  Created by 김우성 on 2021/10/01.
+
+
+ [[그리기 기능 중 배경지 역할을 할 이미지를 담당할 UIScrollView의 SubClass]]
+ - Zoom 기능을 구현했습니다.
+ - 이미지 설정은 `setImage(image:)` 메소드를 통해서 VC에서 호출하여 할당합니다.
+ */
 
 import UIKit
 import SnapKit
 import Then
 
-class DrawingView: UIScrollView {
+class ImageZoomView: UIScrollView {
     
+    // MARK: - UI Object
     private var imageZoomView: UIImageView!
     
+    
+    // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -26,6 +34,8 @@ class DrawingView: UIScrollView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - Helper
     func setImage(image: UIImage) {
         imageZoomView?.removeFromSuperview()
         imageZoomView = nil
@@ -124,7 +134,7 @@ class DrawingView: UIScrollView {
 }
 
 // MARK: - UIScrollViewDelegate
-extension DrawingView: UIScrollViewDelegate {
+extension ImageZoomView: UIScrollViewDelegate {
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.imageZoomView
