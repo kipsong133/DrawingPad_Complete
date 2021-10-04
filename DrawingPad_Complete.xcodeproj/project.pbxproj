@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25B2A43F270962FC00470BD0 /* DrawingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B2A43E270962FC00470BD0 /* DrawingVC.swift */; };
 		25E2E9212706BD2300628782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E2E9202706BD2300628782 /* AppDelegate.swift */; };
 		25E2E9232706BD2300628782 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E2E9222706BD2300628782 /* SceneDelegate.swift */; };
 		25E2E9252706BD2300628782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E2E9242706BD2300628782 /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		25B2A43E270962FC00470BD0 /* DrawingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingVC.swift; sourceTree = "<group>"; };
 		25E2E91D2706BD2300628782 /* DrawingPad_Complete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingPad_Complete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25E2E9202706BD2300628782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25E2E9222706BD2300628782 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				25E2E9242706BD2300628782 /* ViewController.swift */,
+				25B2A43E270962FC00470BD0 /* DrawingVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				25E2E9392706BD8B00628782 /* SketchView.swift in Sources */,
 				25E2E9462706DF0300628782 /* DrawingViewModel.swift in Sources */,
 				25E2E9482706E19A00628782 /* Pencil.swift in Sources */,
+				25B2A43F270962FC00470BD0 /* DrawingVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

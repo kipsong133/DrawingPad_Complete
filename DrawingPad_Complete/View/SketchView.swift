@@ -17,21 +17,28 @@ import Then
 class SketchView: UIScrollView {
 
     // MARK: - Properties
-    private var view = UIView()
+//    private var view = UIView()
     private var backgroundImageView = UIImageView()
     private var drawingImageView = UIImageView(image: UIImage())
-    
+    private var viewModel: DrawingViewModel!
+    public var canZoom: Bool = true
     
     // MARK: - Lifecycle
     convenience init(backgroundImage: UIImage, frame: CGRect) {
         self.init(frame: frame)
         self.set(image: backgroundImage)
-//        backgroundImageView?.image = backgroundImage
+        let viewModel
+        = DrawingViewModel(lastPoint: .zero,
+                           color: .black,
+                           brushWidth: 10.0,
+                           opacity: 1.0,
+                           swiped: false)
+        self.viewModel = viewModel
+        //        backgroundImageView?.image = backgroundImage
         self.delegate = self
         self.showsVerticalScrollIndicator = false
         self.showsHorizontalScrollIndicator = false
         self.decelerationRate = UIScrollView.DecelerationRate.fast
-        view.isUserInteractionEnabled = true
         backgroundImageView.isUserInteractionEnabled = true
         drawingImageView.isUserInteractionEnabled = true
         setUpLayout()
@@ -54,8 +61,7 @@ class SketchView: UIScrollView {
         backgroundImageView.alpha = 0.5
         self.addSubview(backgroundImageView)
         configurateFor(imageSize: image.size)
-        
-        drawingImageView.image = UIImage(named: "Moya") ?? UIImage()
+        drawingImageView.backgroundColor = .red
         drawingImageView.alpha = 0.5
         self.addSubview(drawingImageView)
     }
@@ -68,20 +74,12 @@ class SketchView: UIScrollView {
         self.addSubview(drawingImageView)
 //        setUpDrawingImageView()
         
+        self.pinchGestureRecognizer?.isEnabled = false
+        self.panGestureRecognizer.isEnabled = false
     }
     
     private func setUpView() {
-        view.backgroundColor = .red
-        view.snp.makeConstraints {
-//            $0.top.equalTo(self.snp.top)
-//            $0.bottom.equalTo(self.snp.bottom)
-//            $0.left.equalTo(self.snp.left)
-//            $0.right.equalTo(self.snp.right)
-            $0.centerX.equalTo(self.snp.centerX)
-            $0.centerY.equalTo(self.snp.centerY)
-            $0.width.equalTo(self.snp.width)
-            $0.height.equalTo(self.snp.height)
-        }
+
     }
     
     private func setUpBackgroundImageView() {
@@ -155,7 +153,7 @@ extension SketchView: UIScrollViewDelegate {
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         
-        return backgroundImageView
+        return canZoom ? scrollView.subviews.last : nil
     }
 
     func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
@@ -164,6 +162,77 @@ extension SketchView: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        drawingImageView.frame = backgroundImageView.frame
+        backgroundImageView.frame = drawingImageView.frame
+    }
+}
+
+// MARK: - Drawing
+extension SketchView {
+    override func touchesBegan(_ touches: Set<UITouch>,
+                               with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: drawingImageView)
+        viewModel.touchBegan(location: location)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        viewModel.touchesMoved(currentPoint: touch.location(in: drawingImageView))
+        drawLine(from: viewModel.lastPoint, to: viewModel.currentPoint)
+        self.setNeedsDisplay()
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        
+        if !(viewModel.swiped) {
+            drawLine(from: viewModel.lastPoint,
+                     to: viewModel.lastPoint)
+        }
+        
+//        UIGraphicsBeginImageContext(drawingImageView.frame.size) // 이게 그림을 축소시키고 있음.
+//        backgroundImageView.image?.draw(in: self.bounds, blendMode: .normal, alpha: 1.0)
+        drawingImageView.image?.draw(in: drawingImageView.bounds, blendMode: .normal, alpha: viewModel.opacity) // 그리는 시점
+        UIGraphicsEndImageContext()
+        
+        drawingImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+
+        //        tempImageView.image = nil
+    }
+    
+    func drawLine(from fromPoint: CGPoint,
+                  to toPoint: CGPoint) {
+        
+        UIGraphicsBeginImageContext(drawingImageView.bounds.size)
+        print("drawingImageView.bounds.size: ", drawingImageView.bounds.size)
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        
+        func connectingPoint(from: CGPoint, to: CGPoint) {
+            context.move(to: from)
+            context.addLine(to: to)
+            context.setLineCap(.round)
+        }
+        
+        drawingImageView.image?.draw(in: drawingImageView.bounds)
+        
+        context.move(to: fromPoint)
+        context.addLine(to: toPoint)
+        context.setLineCap(.round)
+        
+        if viewModel.ereaser {
+            context.setBlendMode(.clear)
+            
+            context.setLineWidth(viewModel.brushWidth)
+        } else {
+            context.setBlendMode(.normal)
+            context.setLineWidth(viewModel.brushWidth)
+            context.setStrokeColor(viewModel.color.cgColor)
+        }
+        
+        context.strokePath()
+        drawingImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        drawingImageView.alpha = viewModel.opacity
+        //        UIGraphicsEndImageContext()
+        viewModel.changePoint()
     }
 }
